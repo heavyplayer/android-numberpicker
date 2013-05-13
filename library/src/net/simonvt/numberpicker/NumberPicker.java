@@ -1575,27 +1575,29 @@ public class NumberPicker extends LinearLayout {
      * @return Size information bit mask as defined by
      * {@link #MEASURED_SIZE_MASK} and {@link #MEASURED_STATE_TOO_SMALL}.
      */
-    public static int resolveSizeAndState(int size, int measureSpec, int childMeasuredState) {
-        int result = size;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize =  MeasureSpec.getSize(measureSpec);
-        switch (specMode) {
-            case MeasureSpec.UNSPECIFIED:
-                result = size;
-                break;
-            case MeasureSpec.AT_MOST:
-                if (specSize < size) {
-                    result = specSize | MEASURED_STATE_TOO_SMALL;
-                } else {
-                    result = size;
-                }
-                break;
-            case MeasureSpec.EXACTLY:
-                result = specSize;
-                break;
-        }
-        return result | (childMeasuredState&MEASURED_STATE_MASK);
-    }
+	public static int resolveSizeAndState(int size, int measureSpec, int childMeasuredState) {
+		int result = size;
+		int specMode = MeasureSpec.getMode(measureSpec);
+		int specSize =  MeasureSpec.getSize(measureSpec);
+		// State is only supported on api levels >= 11.
+		boolean includeState = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+		switch (specMode) {
+			case MeasureSpec.UNSPECIFIED:
+				result = size;
+				break;
+			case MeasureSpec.AT_MOST:
+				if (specSize < size) {
+					result = includeState ? specSize | MEASURED_STATE_TOO_SMALL : specSize;
+				} else {
+					result = size;
+				}
+				break;
+			case MeasureSpec.EXACTLY:
+				result = specSize;
+				break;
+		}
+		return includeState ? result | (childMeasuredState&MEASURED_STATE_MASK) : result;
+	}
 
     /**
      * Resets the selector indices and clear the cached string representation of
