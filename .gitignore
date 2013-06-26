@@ -1,25 +1,35 @@
-/*
+# Eclipse
+.project
+.classpath
+.settings
+.checkstyle
 
-!.gitignore
-!README.md
-!LICENSE
-!pom.xml
+# IntelliJ IDEA
+.idea
+*.iml
+*.ipr
+*.iws
+classes
+gen-external-apklibs
 
-!library/
-library/*
-!library/src/
-!library/res/
-!library/libs/
-!library/AndroidManifest.xml
-!library/build.xml
-!library/project.properties
-!library/pom.xml
+# Gradle
+.gradle
+build
 
-!samples/
-samples/*
-!samples/src/
-!samples/res/
-!samples/AndroidManifest.xml
-!samples/build.xml
-!samples/project.properties
-!samples/pom.xml
+# Maven
+target
+release.properties
+pom.xml.*
+
+# Ant
+bin
+gen
+build.xml
+ant.properties
+local.properties
+proguard.cfg
+proguard-project.txt
+
+# Other
+.DS_Store
+tmp
