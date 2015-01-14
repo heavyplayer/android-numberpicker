@@ -1435,6 +1435,8 @@ public class NumberPicker extends LinearLayout {
 
     @Override
     protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
         removeAllCallbacks();
     }
 
